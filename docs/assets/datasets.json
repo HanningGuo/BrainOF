@@ -1,0 +1,422 @@
+[
+  {
+    "name": "FACED",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "250Hz",
+    "channels": 32,
+    "duration": "10s",
+    "participants": 123,
+    "samples": 10332
+  },
+  {
+    "name": "PhysioNet-MI",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "160Hz",
+    "channels": 64,
+    "duration": "4s",
+    "participants": 109,
+    "samples": 18697
+  },
+  {
+    "name": "PREDICT",
+    "modality": "EEG",
+    "paradigm": "rest",
+    "sr": "5,000Hz",
+    "channels": 63,
+    "duration": "10s",
+    "participants": 159,
+    "samples": 17511
+  },
+  {
+    "name": "REEG-BACA",
+    "modality": "EEG",
+    "paradigm": "rest",
+    "sr": "1,000Hz",
+    "channels": 64,
+    "duration": "10s",
+    "participants": 608,
+    "samples": 53089
+  },
+  {
+    "name": "SEED",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "1,000Hz",
+    "channels": 62,
+    "duration": "10s",
+    "participants": 15,
+    "samples": 14895
+  },
+  {
+    "name": "SEED-DV",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "1,000Hz",
+    "channels": 62,
+    "duration": "10s",
+    "participants": 20,
+    "samples": 7644
+  },
+  {
+    "name": "SEED-SD",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "1,000Hz",
+    "channels": 62,
+    "duration": "10s",
+    "participants": 40,
+    "samples": 38120
+  },
+  {
+    "name": "SEED-VIG",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "200Hz",
+    "channels": 17,
+    "duration": "8s",
+    "participants": 21,
+    "samples": 20332
+  },
+  {
+    "name": "SEED-VII",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "1,000Hz",
+    "channels": 62,
+    "duration": "10s",
+    "participants": 20,
+    "samples": 26257
+  },
+  {
+    "name": "SEED-VLA/VRW",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "300Hz",
+    "channels": 18,
+    "duration": "10s",
+    "participants": 20,
+    "samples": 17287
+  },
+  {
+    "name": "TDBRAIN",
+    "modality": "EEG",
+    "paradigm": "rest",
+    "sr": "500Hz",
+    "channels": 26,
+    "duration": "10s",
+    "participants": 1274,
+    "samples": 26422
+  },
+  {
+    "name": "TUEG",
+    "modality": "EEG",
+    "paradigm": "rest",
+    "sr": "250Hz",
+    "channels": 19,
+    "duration": "10s",
+    "participants": 13928,
+    "samples": 4562151
+  },
+  {
+    "name": "WBCIC-MI",
+    "modality": "EEG",
+    "paradigm": "task",
+    "sr": "1,000Hz",
+    "channels": 58,
+    "duration": "4s",
+    "participants": 62,
+    "samples": 40290
+  },
+  {
+    "name": "ABIDE-I",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "multi-site",
+    "channels": 246,
+    "duration": "-",
+    "participants": 1112,
+    "samples": 1152
+  },
+  {
+    "name": "ABIDE-II",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "multi-site",
+    "channels": 246,
+    "duration": "-",
+    "participants": 1114,
+    "samples": 1614
+  },
+  {
+    "name": "ABRIM",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "1,000ms",
+    "channels": 246,
+    "duration": "320s",
+    "participants": 282,
+    "samples": 562
+  },
+  {
+    "name": "AOMIC-ID1000",
+    "modality": "fMRI",
+    "paradigm": "task",
+    "sr": "2,200ms",
+    "channels": 246,
+    "duration": "660s",
+    "participants": 881,
+    "samples": 881
+  },
+  {
+    "name": "AOMIC-PIOP1",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "750ms",
+    "channels": 246,
+    "duration": "360s",
+    "participants": 216,
+    "samples": 1236
+  },
+  {
+    "name": "AOMIC-PIOP2",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "2,000ms",
+    "channels": 246,
+    "duration": "480s",
+    "participants": 226,
+    "samples": 896
+  },
+  {
+    "name": "CHCP",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "710ms",
+    "channels": 246,
+    "duration": "227s",
+    "participants": 366,
+    "samples": 3379
+  },
+  {
+    "name": "CoRR",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "multi-site",
+    "channels": 246,
+    "duration": "-",
+    "participants": 1629,
+    "samples": 5212
+  },
+  {
+    "name": "DLBS",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "2,000ms",
+    "channels": 246,
+    "duration": "374s",
+    "participants": 464,
+    "samples": 6839
+  },
+  {
+    "name": "NADR",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "3,000ms",
+    "channels": 246,
+    "duration": "606s",
+    "participants": 301,
+    "samples": 596
+  },
+  {
+    "name": "Narratives",
+    "modality": "fMRI",
+    "paradigm": "task",
+    "sr": "1,500ms",
+    "channels": 246,
+    "duration": "480s",
+    "participants": 345,
+    "samples": 1321
+  },
+  {
+    "name": "NKI-RS",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "1,400ms",
+    "channels": 246,
+    "duration": "448s",
+    "participants": 1344,
+    "samples": 16408
+  },
+  {
+    "name": "Paingen placebo",
+    "modality": "fMRI",
+    "paradigm": "task",
+    "sr": "460ms",
+    "channels": 246,
+    "duration": "132s",
+    "participants": 395,
+    "samples": 3143
+  },
+  {
+    "name": "QTIM",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "2,100ms",
+    "channels": 246,
+    "duration": "315s",
+    "participants": 1202,
+    "samples": 2453
+  },
+  {
+    "name": "REST-meta-MDD",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "multi-site",
+    "channels": 116,
+    "duration": "-",
+    "participants": 2380,
+    "samples": 2380
+  },
+  {
+    "name": "SALD",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "2,000ms",
+    "channels": 246,
+    "duration": "480s",
+    "participants": 493,
+    "samples": 493
+  },
+  {
+    "name": "SpaceTop",
+    "modality": "fMRI",
+    "paradigm": "task",
+    "sr": "460ms",
+    "channels": 246,
+    "duration": "200s",
+    "participants": 101,
+    "samples": 11660
+  },
+  {
+    "name": "UCLA CNP",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "2,000ms",
+    "channels": 246,
+    "duration": "304s",
+    "participants": 272,
+    "samples": 1969
+  },
+  {
+    "name": "CamCAN-MEG",
+    "modality": "MEG",
+    "paradigm": "rest & task",
+    "sr": "1,000Hz",
+    "channels": 306,
+    "duration": "2s",
+    "participants": 456,
+    "samples": 279965
+  },
+  {
+    "name": "CamCAN-fMRI",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "1,970ms",
+    "channels": 246,
+    "duration": "520s",
+    "participants": 465,
+    "samples": 1763
+  },
+  {
+    "name": "HCP-YA-MEG",
+    "modality": "MEG",
+    "paradigm": "rest & task",
+    "sr": "2,000Hz",
+    "channels": 248,
+    "duration": "2s",
+    "participants": 89,
+    "samples": 241115
+  },
+  {
+    "name": "HCP-YA-fMRI",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "720ms",
+    "channels": 246,
+    "duration": "230s",
+    "participants": 1113,
+    "samples": 32281
+  },
+  {
+    "name": "LEMON-EEG",
+    "modality": "EEG",
+    "paradigm": "rest",
+    "sr": "2,500Hz",
+    "channels": 61,
+    "duration": "10s",
+    "participants": 144,
+    "samples": 12235
+  },
+  {
+    "name": "LEMON-fMRI",
+    "modality": "fMRI",
+    "paradigm": "rest",
+    "sr": "1,400ms",
+    "channels": 246,
+    "duration": "448s",
+    "participants": 160,
+    "samples": 320
+  },
+  {
+    "name": "MOUS-MEG",
+    "modality": "MEG",
+    "paradigm": "rest & task",
+    "sr": "1,200Hz",
+    "channels": 275,
+    "duration": "2s",
+    "participants": 204,
+    "samples": 66322
+  },
+  {
+    "name": "MOUS-fMRI",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "1,680ms",
+    "channels": 246,
+    "duration": "420s",
+    "participants": 204,
+    "samples": 678
+  },
+  {
+    "name": "OMEGA",
+    "modality": "MEG",
+    "paradigm": "rest",
+    "sr": "2,400Hz",
+    "channels": 275,
+    "duration": "2s",
+    "participants": 644,
+    "samples": 164834
+  },
+  {
+    "name": "WAND-MEG",
+    "modality": "MEG",
+    "paradigm": "rest & task",
+    "sr": "1,200Hz",
+    "channels": 275,
+    "duration": "2s",
+    "participants": 170,
+    "samples": 155474
+  },
+  {
+    "name": "WAND-fMRI",
+    "modality": "fMRI",
+    "paradigm": "rest & task",
+    "sr": "2,000ms",
+    "channels": 246,
+    "duration": "638s",
+    "participants": 170,
+    "samples": 776
+  }
+]

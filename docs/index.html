@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Brain-OF — An Omnifunctional Foundation Model for fMRI, EEG and MEG</title>
+  <meta name="description" content="Brain-OF learns shared representations across fMRI, EEG and MEG through any-resolution sampling, sparse experts, and masked time–frequency pretraining.">
+  <meta name="theme-color" content="#15264c">
+  <link rel="icon" type="image/png" href="assets/brain-of-artistic-f.png">
+  <link rel="stylesheet" href="styles.css?v=justified-text-20260924">
+  <script defer src="site-config.js"></script><script defer src="app.js?v=nav-20260924"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="topbar">
+  <a class="brand" href="#overview"><img class="brand-icon" src="assets/brain-of-artistic-f.png" width="36" height="36" alt=""><span class="brand-word">Brain-<span class="brand-of">OF</span></span></a>
+  <nav aria-label="Primary"><a href="#data">Data</a><a href="#method">Method</a><a href="#results">Results</a><a href="#models">Models</a></nav>
+  <a class="top-paper" id="persistent-resources" href="#paper-links">Paper & resources <span aria-hidden="true">↗</span></a>
+  <button class="menu-button" aria-expanded="false" aria-controls="sidebar" type="button" aria-label="Toggle page contents"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M13 9h4M13 13h4"/></svg><span>Contents</span></button>
+</header>
+<aside id="sidebar" class="sidebar">
+  <div class="side-heading">EXPLORE THE RESEARCH</div>
+  <nav aria-label="Page contents">
+    <a href="#overview" class="active"><span class="nav-number">01</span><span class="nav-label">Overview</span></a>
+    <a href="#data"><span class="nav-number">02</span><span class="nav-label">Pretraining corpus</span></a>
+    <a href="#method"><span class="nav-number">03</span><span class="nav-label">Architecture</span></a>
+    <a href="#reconstruction"><span class="nav-number">04</span><span class="nav-label">Reconstruction quality</span></a>
+    <a href="#results"><span class="nav-number">05</span><span class="nav-label">Downstream evaluation</span></a>
+    <a href="#fusion"><span class="nav-number">06</span><span class="nav-label">Multimodal fusion</span></a>
+    <a href="#insights"><span class="nav-number">07</span><span class="nav-label">Contributions & interpretation</span></a>
+    <a href="#models"><span class="nav-number">08</span><span class="nav-label">Model family</span></a>
+    <a href="#citation-section"><span class="nav-number">09</span><span class="nav-label">Citation</span></a>
+  </nav>
+  <div class="side-bottom"><span class="side-rule"></span><p class="side-message"><span>Heterogeneous signals.</span><span>Omnifunctional representations.</span></p><div class="modality-key"><i class="fmri"></i> fMRI <i class="eeg"></i> EEG <i class="meg"></i> MEG</div></div>
+</aside>
+<main id="main">
+<section id="overview" class="hero">
+  <h1>Brain-<span>OF</span></h1>
+  <p class="paper-title">An <span class="omni-word"><b>O</b>mni<b>F</b>unctional</span> Foundation Model<br>for <span class="text-fmri">fMRI</span>, <span class="text-eeg">EEG</span> and <span class="text-meg">MEG</span></p>
+  <p id="venue" class="venue-line" hidden></p>
+  <div class="authors">Hanning Guo<sup>1,2</sup> <span>Hanwen Bi<sup>1,3</sup></span> <span>Farah Abdellatif<sup>1,2</sup></span> <span>Andrei Galbenus<sup>1,2</sup></span><br><span>Jon. N. Shah<sup>1,2,4</sup></span> <span>Abigail Morrison<sup>1,2</sup></span> <span>Jürgen Dammers<sup>1,2</sup></span></div>
+  <div class="affiliations" aria-label="Author affiliations">
+    <a href="https://www.fz-juelich.de/" title="1 — Forschungszentrum Jülich"><sup>1</sup><img src="assets/logo-juelich.svg" alt="Forschungszentrum Jülich" width="145" height="54"></a>
+    <a href="https://www.rwth-aachen.de/" title="2 — RWTH Aachen University"><sup>2</sup><img src="assets/logo-rwth.svg" alt="RWTH Aachen University" width="148" height="54"></a>
+    <a href="https://www.hhu.de/" title="3 — Heinrich Heine University Düsseldorf"><sup>3</sup><img src="assets/logo-hhu.png" alt="Heinrich Heine University Düsseldorf" width="145" height="54"></a>
+    <a href="https://www.jara.org/" title="4 — JARA-BRAIN"><sup>4</sup><img src="assets/logo-jara.svg" alt="JARA — Jülich Aachen Research Alliance" width="115" height="54"></a>
+  </div>
+  <div id="paper-links" class="resource-buttons" data-resource-buttons></div>
+  <div id="awards" class="awards" hidden></div>
+  <div class="hero-diagram" role="img" aria-label="fMRI, EEG and MEG inputs are mapped by ARNESS into shared latent tokens, processed by Brain-OF, and adapted to downstream tasks.">
+    <div class="diagram-caption">HETEROGENEOUS SIGNALS · JOINT PRETRAINING</div>
+    <div class="signal-inputs"><div class="input fmri"><b>fMRI</b><span>Hemodynamic activity</span></div><div class="input eeg"><b>EEG</b><span>Electrical activity</span></div><div class="input meg"><b>MEG</b><span>Magnetic activity</span></div></div>
+    <div class="merge-lines" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="shared-model"><span class="model-overline">ARNESS · 128 SHARED LATENT TOKENS</span><strong>Brain-OF</strong><span>DINT attention + Sparse Mixture of Experts</span></div>
+    <div class="diagram-output"><span>Classification</span><span>Regression</span><span>Multimodal fusion</span></div>
+    <p class="diagram-footnote">Joint pretraining across modalities. Single- or paired-modality downstream inputs.</p>
+  </div>
+  <div class="hero-stats"><div><strong>3</strong><span>functional modalities</span></div><div><strong>37</strong><span>pretraining datasets</span></div><div><strong>5.87M</strong><span>pretraining samples</span></div><div><strong>1.7B</strong><span>parameters in Huge</span></div></div>
+  <div class="tldr"><span class="eyebrow">WHY JOINT PRETRAINING?</span><div><p><strong>Each modality measures a different aspect of brain activity. Together, they broaden both what the model can learn and the data it can learn from.</strong></p><p>fMRI provides spatially precise measures of hemodynamic activity, whereas EEG and MEG resolve electrophysiological dynamics at high temporal resolution. Pretraining on a single modality limits access to this complementary information and to the collective scale of available brain recordings.</p><p>Brain-OF brings these heterogeneous datasets into a shared pretraining framework, combining spatial, temporal, and spectral diversity to learn transferable representations for unimodal and multimodal brain decoding.</p></div></div>
+  <div id="video-section" hidden></div>
+</section>
+<section id="data" class="section">
+  <div class="section-label">02 / PRETRAINING CORPUS</div><h2>Diverse brain signals.<br>Large-scale pretraining.</h2>
+  <p class="section-intro">The pretraining corpus brings together resting-state and task recordings from 37 public datasets across international sites. It spans multicultural and multiracial populations, healthy participants and clinical cohorts, and diverse acquisition systems and experimental paradigms.</p>
+  <div class="data-stats"><div><strong>32,278</strong><span>unique participants</span></div><div><strong>5,870,984</strong><span>pretraining samples</span></div><div><strong>2.8 TB</strong><span>pretraining corpus size</span></div></div>
+  <div class="corpus-profiles" id="corpus-profiles" aria-label="Pretraining data by modality"></div>
+  <details class="dataset-explorer"><summary>Explore the pretraining datasets</summary><div class="detail-content">
+  <div class="dataset-heading"><div><h3>Samples across datasets</h3><p class="small muted">Bar lengths use a logarithmic scale; exact sample counts are shown.</p></div><div class="segmented" role="group" aria-label="Dataset modality"><button data-dataset="fMRI" aria-pressed="true">fMRI</button><button data-dataset="EEG" aria-pressed="false">EEG</button><button data-dataset="MEG" aria-pressed="false">MEG</button></div></div>
+  <div id="dataset-chart" class="dataset-chart"></div>
+  <div class="data-footer"><span class="source">37 datasets · 42 modality-specific entries.</span><a href="assets/dataset-overview.svg" download>Download full dataset figure ↓</a></div>
+</div></details>
+  <details><summary>Acquisition diversity and exact dataset statistics</summary><div class="detail-content"><p>The corpus includes 14 EEG, 23 fMRI, and 5 MEG entries. Multimodal cohorts appear under each relevant modality. Channel counts range from 17 to 64 for EEG and 248 to 306 for MEG; fMRI uses 116 or 246 ROIs. Acquisition sampling rates and repetition times below are those reported in the original acquisition, before preprocessing.</p><div class="table-scroll"><table id="dataset-table"><caption>Pretraining dataset statistics</caption><thead><tr><th>Dataset</th><th>Modality</th><th>Paradigm</th><th>SR / TR</th><th>Channels / ROIs</th><th>Participants</th><th>Samples</th></tr></thead><tbody></tbody></table></div></div></details>
+</section>
+<section id="method" class="section">
+  <div class="section-label">03 / ARCHITECTURE</div><h2>Different modalities.<br>A common representation.</h2>
+  <p class="section-intro">Brain recordings differ in physical origin, sensor configurations or brain parcellations, and spatial, temporal, and frequency resolution. Brain-OF addresses resolution discrepancies, semantic heterogeneity, and neural-signal structure through three complementary components.</p>
+  <div class="contribution-grid"><article><span class="step-number">01</span><h3>Bridge resolutions</h3><p><strong>ARNESS</strong> projects signals with heterogeneous spatial, temporal, and spectral resolutions into 128 shared latent tokens. This compact representation lets the backbone process diverse inputs and integrate paired modalities.</p></article><article><span class="step-number">02</span><h3>Resolve semantic heterogeneity</h3><p><strong>Sparse MoE</strong> combines shared experts for modality-invariant structure with routed experts for modality-specific semantics. <strong>DINT attention</strong> suppresses irrelevant context while integrating local and global dependencies.</p></article><article><span class="step-number">03</span><h3>Pretrain in both domains</h3><p><strong>Masked Temporal-Frequency Modeling (MTFM)</strong> jointly reconstructs signals and their Fourier-domain components, encouraging representations that capture complementary temporal and spectral structure.</p></article></div>
+  <figure class="paper-figure"><button class="figure-zoom" data-zoom="assets/architecture.pdf" data-caption="Brain-OF architecture" aria-label="Enlarge Brain-OF architecture"><img src="assets/architecture.pdf" alt="Brain-OF pretraining, ARNESS sampling, serial multimodal fusion, Sparse MoE and DINT attention" loading="lazy" width="1170" height="825"><span>Enlarge figure ↗</span></button><figcaption><b>From heterogeneous signals to a shared backbone.</b> ARNESS also acts as the reconstruction decoder and supports serial multimodal fusion.</figcaption></figure>
+
+</section>
+<section id="reconstruction" class="section">
+  <div class="section-label">04 / RECONSTRUCTION QUALITY</div><h2>Temporal dynamics.<br>Spectral and spatial structure.</h2>
+  <p class="section-intro">MTFM couples signal reconstruction with Fourier-domain reconstruction during self-supervised pretraining. The examples below examine the resulting temporal dynamics, EEG spectral structure, fMRI functional connectivity, and MEG sensor topography.</p>
+  <details class="objective-details"><summary>MTFM: pretraining steps and objective</summary><div class="detail-content">
+<ol class="objective-workflow">
+<li><h3>Transform</h3><p><strong>EEG & MEG:</strong> FFT along time, within each channel.<br><strong>fMRI:</strong> FFT across the ordered ROIs, at each time point.</p></li>
+<li><h3>Mask Fourier components</h3><p>Mask components in the transformed representation, then apply the inverse FFT to return the corrupted signal to its original layout.</p></li>
+<li><h3>Mask temporal segments</h3><p>Mask segments of the corrupted signal and flatten the matrix into a channel/ROI–patch sequence for the model.</p></li>
+<li><h3>Reconstruct</h3><p>Restore the decoder output to the original signal layout to recover the masked temporal segments and corresponding Fourier-domain components.</p></li>
+</ol>
+<div class="objective-summary"><h3>A joint reconstruction objective</h3><p>The loss combines reconstruction errors in the temporal and Fourier domains. The weight <span class="math-inline">α</span> balances their contributions.</p></div>
+<div class="formula" aria-label="MTFM loss equals one minus alpha times temporal loss plus alpha times frequency loss"><span>ℒ<sub>MTFM</sub> = (1 − α) ℒ<sub>time</sub> + α ℒ<sub>frequency</sub></span></div>
+<p>Both terms use Smooth L1 loss.</p>
+</div></details>
+  <div class="recon-panel"><div class="recon-controls"><div class="segmented" role="group" aria-label="Reconstruction modality"><button data-recon="eeg" aria-pressed="true">EEG</button><button data-recon="fmri" aria-pressed="false">fMRI</button><button data-recon="meg" aria-pressed="false">MEG</button></div><h3 id="recon-title">Temporal dynamics & spectral bursts</h3><p id="recon-description">Compare the original and reconstructed EEG waveform and spectrogram. These qualitative examples show how temporal and spectral structure are represented together.</p><span class="source">Brain-OF Huge · Qualitative reconstructions</span></div><button class="figure-zoom recon-image" id="recon-zoom" data-zoom="assets/reconstruction-eeg.png" data-caption="EEG reconstruction"><img id="recon-img" src="assets/reconstruction-eeg.png" alt="Original and reconstructed EEG signal and spectrogram" loading="lazy" width="532" height="596"><span>Enlarge ↗</span></button></div>
+</section>
+<section id="results" class="section">
+  <div class="section-label">05 / DOWNSTREAM EVALUATION</div><h2>Brain-OF across<br>modalities and tasks.</h2>
+  <p class="section-intro">Emotion recognition, seizure and abnormality detection, clinical classification, and age prediction. Explore all nine unimodal settings from the main comparison.</p>
+  <div class="result-controls"><label for="benchmark">Choose an evaluation</label><select id="benchmark"></select></div>
+  <div class="result-card"><div class="result-heading"><div><span class="eyebrow" id="result-modality"></span><h3 id="result-title"></h3><p id="result-metric" class="muted"></p></div></div><div id="result-bars" class="result-bars"></div><p class="small muted">Mean ± standard deviation over five seeds. Brain-OF uses full finetuning. “Best baseline” is selected from the 12 reported baselines for this setting.</p><p id="result-takeaway" class="takeaway"></p>
+  <details class="benchmark-scores"><summary id="all-results-summary">Compare all methods for this evaluation</summary><div class="detail-content table-scroll"><table id="all-results"><caption id="all-results-caption"></caption><thead><tr><th scope="col">Method</th><th scope="col">Mean ± SD</th></tr></thead><tbody></tbody></table></div></details>
+  </div>
+  <div class="additional-analyses" aria-labelledby="analyses-heading">
+  <div class="analyses-heading"><span class="eyebrow">FURTHER MODEL ANALYSIS</span><h3 id="analyses-heading">Adaptation, robustness, and representations</h3></div>
+<details class="evidence-panel" id="lora-analysis"><summary><span>LoRA: efficient adaptation with low-rank updates</span><span class="analysis-scope">≈2% trainable</span></summary><div class="detail-content">
+<p>LoRA freezes the pretrained backbone and learns low-rank update matrices. Brain-OF Base uses rank 32 and a scaling factor of 64, with approximately <strong>2% of the total parameters trainable</strong>.</p>
+<div class="table-scroll"><table id="lora-results"><caption>Full finetuning and LoRA on Brain-OF Base</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Modality</th><th scope="col">Metric</th><th scope="col">Full finetuning</th><th scope="col">LoRA</th></tr></thead><tbody>
+<tr><th scope="row">SEED-V</th><td>EEG</td><td>Cohen’s κ (%) ↑</td>
+<td><strong>23.98 ± 0.29</strong></td>
+<td>21.81 ± 0.13</td>
+</tr>
+<tr><th scope="row">TUAB</th><td>EEG</td><td>BAC (%) ↑</td>
+<td><strong>81.88 ± 0.17</strong></td>
+<td>81.30 ± 0.04</td>
+</tr>
+<tr><th scope="row">ADNI</th><td>fMRI</td><td>BAC (%) ↑</td>
+<td>68.23 ± 2.07</td>
+<td><strong>68.44 ± 2.13</strong></td>
+</tr>
+<tr><th scope="row">ADHD-200</th><td>fMRI</td><td>BAC (%) ↑</td>
+<td><strong>62.57 ± 1.19</strong></td>
+<td>62.10 ± 1.04</td>
+</tr>
+<tr><th scope="row">CamCAN</th><td>MEG</td><td>MAE (years) ↓</td>
+<td><strong>8.99 ± 0.14</strong></td>
+<td>9.17 ± 0.44</td>
+</tr>
+<tr><th scope="row">LEMON</th><td>fMRI</td><td>BAC (%) ↑</td>
+<td>58.95 ± 2.13</td>
+<td><strong>59.36 ± 3.02</strong></td>
+</tr>
+</tbody></table></div>
+<p>LoRA has slightly higher mean scores on ADNI and LEMON-fMRI. Full finetuning performs better on the other four settings, with the largest difference on SEED-V.</p>
+</div></details>
+<details class="evidence-panel" id="linear-probing-analysis"><summary><span>Linear probing and pretraining controls</span><span class="analysis-scope">Representation quality</span></summary><div class="detail-content">
+<p>Linear probing evaluates pretrained representation quality by freezing the entire backbone and training only a linear prediction head. The comparisons below also include full finetuning of pretrained models and full training of the same architecture from random initialization.</p>
+<div class="table-scroll"><table id="linear-probing-base"><caption>Brain-OF Base</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Modality</th><th scope="col">Metric</th><th scope="col">Full finetuning</th><th scope="col">Linear probing</th><th scope="col">From scratch</th></tr></thead><tbody>
+<tr><th scope="row">TUAB</th><td>EEG</td><td>BAC (%) ↑</td>
+<td><strong>81.88 ± 0.17</strong></td>
+<td>79.14 ± 0.24</td>
+<td>77.59 ± 0.27</td>
+</tr>
+<tr><th scope="row">ADNI</th><td>fMRI</td><td>BAC (%) ↑</td>
+<td><strong>68.23 ± 2.07</strong></td>
+<td>65.22 ± 1.47</td>
+<td>63.39 ± 2.36</td>
+</tr>
+<tr><th scope="row">CamCAN</th><td>MEG</td><td>MAE (years) ↓</td>
+<td><strong>8.99 ± 0.14</strong></td>
+<td>10.92 ± 0.22</td>
+<td>9.69 ± 1.07</td>
+</tr>
+</tbody></table></div>
+<div class="table-scroll"><table id="linear-probing-huge"><caption>Brain-OF Huge</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Modality</th><th scope="col">Metric</th><th scope="col">Full finetuning</th><th scope="col">Linear probing</th><th scope="col">From scratch</th></tr></thead><tbody>
+<tr><th scope="row">TUAB</th><td>EEG</td><td>BAC (%) ↑</td>
+<td><strong>82.87 ± 0.18</strong></td>
+<td>81.92 ± 0.21</td>
+<td>80.82 ± 0.18</td>
+</tr>
+<tr><th scope="row">ADNI</th><td>fMRI</td><td>BAC (%) ↑</td>
+<td><strong>71.79 ± 2.19</strong></td>
+<td>70.76 ± 1.22</td>
+<td>64.85 ± 1.03</td>
+</tr>
+<tr><th scope="row">CamCAN</th><td>MEG</td><td>MAE (years) ↓</td>
+<td><strong>7.87 ± 0.22</strong></td>
+<td>9.02 ± 0.11</td>
+<td>8.59 ± 0.94</td>
+</tr>
+</tbody></table></div>
+<p>Frozen pretrained features outperform training from scratch on TUAB and ADNI, while CamCAN age prediction benefits more from adapting the backbone.</p>
+</div></details>
+<details class="evidence-panel" id="noise-analysis"><summary><span>Robustness under injected noise</span><span class="analysis-scope">20 to −5 dB</span></summary><div class="detail-content">
+<p>DINT attention shows stronger noise robustness than vanilla attention in this stress test, retaining higher balanced accuracy as noise increases.</p>
+<figure class="paper-figure analysis-figure"><button class="figure-zoom" data-zoom="assets/noise-robustness.png" data-caption="Noise stress test for Brain-OF Base on TUAB" aria-label="Enlarge the noise robustness plot"><img src="assets/noise-robustness.svg" alt="Balanced accuracy decreases for both methods as SNR falls from 20 to minus 5 dB. DINT has a higher mean at every tested noise level. Error bars show one standard deviation." loading="lazy" width="1632" height="832"><span>Enlarge plot ↗</span></button></figure>
+</div></details>
+<details class="evidence-panel" id="representation-analysis"><summary><span>Representation space across scales</span><span class="analysis-scope">Raw inputs vs. Brain-OF</span></summary><div class="detail-content">
+<p>PCA highlights class-related separation in TUAB (EEG) and ADNI (fMRI), and continuous age-related structure in CamCAN (MEG), comparing raw inputs with finetuned Base, Large, and Huge embeddings.</p>
+<figure class="paper-figure analysis-figure"><button class="figure-zoom" data-zoom="assets/representation-pca.png" data-caption="PCA of raw features and finetuned Brain-OF representations" aria-label="Enlarge the complete representation-space figure"><img src="assets/representation-pca.png" alt="Twelve PCA projections: raw inputs and finetuned Base, Large, and Huge embeddings for TUAB, ADNI, and CamCAN. Colors identify classes in TUAB and ADNI and chronological age in CamCAN." loading="lazy" width="2070" height="1472"><span>Enlarge figure ↗</span></button></figure>
+<details class="representation-support"><summary>Quantitative support for the representation space</summary><div class="detail-content">
+<p>First-component associations with the target strengthen from Base to Huge across these datasets. On TUAB, Base’s first component explains 73.0% of the embedding variance.</p>
+<div class="table-scroll"><table id="representation-results"><caption>Correlations and class separability</caption><thead><tr><th scope="col">Dataset</th><th scope="col">Modality</th><th scope="col">Model</th><th scope="col">Pearson <i>r</i></th><th scope="col">Spearman <i>ρ</i></th><th scope="col">AUC</th></tr></thead><tbody>
+<tr class="analysis-group-start"><th scope="row">TUAB</th><td>EEG</td><td>Base</td><td>0.701</td><td>0.678</td><td>0.892</td></tr>
+<tr><th scope="row">TUAB</th><td>EEG</td><td>Large</td><td>0.707</td><td>0.687</td><td>0.898</td></tr>
+<tr><th scope="row">TUAB</th><td>EEG</td><td>Huge</td><td>0.723</td><td>0.700</td><td>0.905</td></tr>
+<tr class="analysis-group-start"><th scope="row">ADNI</th><td>fMRI</td><td>Base</td><td>0.380</td><td>0.388</td><td>0.724</td></tr>
+<tr><th scope="row">ADNI</th><td>fMRI</td><td>Large</td><td>0.478</td><td>0.438</td><td>0.753</td></tr>
+<tr><th scope="row">ADNI</th><td>fMRI</td><td>Huge</td><td>0.484</td><td>0.496</td><td>0.786</td></tr>
+<tr class="analysis-group-start"><th scope="row">CamCAN</th><td>MEG</td><td>Base</td><td>0.746</td><td>0.735</td><td>—</td></tr>
+<tr><th scope="row">CamCAN</th><td>MEG</td><td>Large</td><td>0.784</td><td>0.762</td><td>—</td></tr>
+<tr><th scope="row">CamCAN</th><td>MEG</td><td>Huge</td><td>0.805</td><td>0.772</td><td>—</td></tr>
+</tbody></table></div>
+<p class="analysis-table-note">AUC uses the first principal component alone for classification. It is not applicable to the continuous age target in CamCAN.</p>
+</div></details>
+</div></details>
+  </div>
+</section>
+<section id="fusion" class="section">
+  <div class="section-label">06 / MULTIMODAL FUSION</div><h2>When two views<br>work better together.</h2>
+  <p class="section-intro">Serial ARNESS resampling combines paired modalities in the same latent representation, without an extra modality-specific fusion branch.</p>
+  <div class="fusion-controls"><div class="segmented" role="group" aria-label="Fusion model size"><button data-fusion="0" aria-pressed="true">Base</button><button data-fusion="1" aria-pressed="false">Large</button><button data-fusion="2" aria-pressed="false">Huge</button></div><span class="source">Mean ± SD, five seeds</span></div>
+  <div id="fusion-panels" class="fusion-grid"></div><p id="fusion-note" class="takeaway"></p>
+</section>
+<section id="insights" class="section">
+  <div class="section-label">07 / MODALITY CONTRIBUTIONS & INTERPRETABILITY</div><h2>Where does the knowledge<br>come from?</h2>
+  <p class="section-intro">How much does pretraining on each modality improve downstream prediction? Modality Shapley values quantify each modality’s average marginal contribution to downstream performance across combinations of pretraining modalities. Separately, occlusion analysis masks individual channels or ROIs to identify which signals most influence prediction performance.</p>
+  <div class="insight-lead"><strong><span>Cross-modal contributions</span>
+<span>may exceed native ones.</span></strong><p class="shapley-explanation">On TUAB, the normalized modality Shapley values are 0.41 for MEG, 0.37 for fMRI, and 0.22 for EEG.</p></div>
+  <figure class="paper-figure"><button class="figure-zoom" data-zoom="assets/importance.png" data-caption="Modality importance analysis"><img src="assets/importance.png" alt="Task-level modality Shapley values and relative importance scores, with global summaries" loading="lazy" width="1191" height="594"><span>Enlarge figure ↗</span></button><figcaption>Across evaluated tasks, fMRI has the largest global contribution under both scores.</figcaption></figure>
+  <h3 class="subheading">A view of the signals behind the prediction</h3>
+  <figure class="paper-figure"><button class="figure-zoom" data-zoom="assets/interpretability.png" data-caption="Occlusion-based explanations"><img src="assets/interpretability.png" alt="Occlusion maps for TUAB EEG, ADNI fMRI, and CamCAN MEG" loading="lazy" width="1194" height="324"><span>Enlarge figure ↗</span></button><figcaption><b>Model explanations across three modalities.</b> Occluding frontal/central EEG channels, temporal fMRI regions, and temporal/parietal MEG sensors affects prediction performance in the illustrated tasks. </figcaption></figure>
+
+</section>
+<section id="models" class="section">
+  <div class="section-label">08 / MODEL FAMILY</div><h2>Scaling Brain-OF.<br>From Base to Giant.</h2>
+  <p class="section-intro">Brain-OF spans compact and billion-parameter variants. Increasing model capacity expands the space for shared and specialized representations, while sparse routing keeps only a subset of parameters active for each token.</p>
+  <div id="model-grid" class="model-grid" role="group" aria-label="Brain-OF model variants"></div>
+</section>
+<section id="citation-section" class="section final-section">
+  <div class="citation-heading"><h2>Cite this work</h2></div><p>If you find Brain-OF useful in your research, please consider citing our work:</p>
+  <div class="citation-box"><button id="copy-citation" aria-label="Copy BibTeX citation"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span>Copy</span></button><pre id="citation"></pre></div><span id="copy-status" role="status" class="small"></span>
+  <footer><a class="brand" href="#overview"><img class="brand-icon" src="assets/brain-of-artistic-f.png" alt="" width="30" height="30"><span class="brand-word">Brain-<span class="brand-of">OF</span></span></a><span>Omnifunctional foundation model for brain decoding</span><a href="#overview">Back to top ↑</a></footer>
+</section>
+</main>
+<dialog id="figure-dialog"><div class="dialog-header"><strong id="figure-caption"></strong><button id="close-figure" aria-label="Close enlarged figure">Close ×</button></div><img id="enlarged-figure" alt=""></dialog>
+</body></html>

@@ -1,0 +1,359 @@
+{
+  "source": {
+    "file": "BrainOF.pdf",
+    "pages": {
+      "representation": 31,
+      "linear_probing": 32,
+      "noise": 33,
+      "lora": 33
+    }
+  },
+  "lora": {
+    "model": "Base",
+    "rank": 32,
+    "scaling_factor": 64,
+    "trainable_fraction": "~2%",
+    "rows": [
+      {
+        "dataset": "SEED-V",
+        "modality": "EEG",
+        "metric": "Cohen’s κ (%) ↑",
+        "lower": false,
+        "full": [
+          23.98,
+          0.29
+        ],
+        "lora": [
+          21.81,
+          0.13
+        ]
+      },
+      {
+        "dataset": "TUAB",
+        "modality": "EEG",
+        "metric": "BAC (%) ↑",
+        "lower": false,
+        "full": [
+          81.88,
+          0.17
+        ],
+        "lora": [
+          81.3,
+          0.04
+        ]
+      },
+      {
+        "dataset": "ADNI",
+        "modality": "fMRI",
+        "metric": "BAC (%) ↑",
+        "lower": false,
+        "full": [
+          68.23,
+          2.07
+        ],
+        "lora": [
+          68.44,
+          2.13
+        ]
+      },
+      {
+        "dataset": "ADHD-200",
+        "modality": "fMRI",
+        "metric": "BAC (%) ↑",
+        "lower": false,
+        "full": [
+          62.57,
+          1.19
+        ],
+        "lora": [
+          62.1,
+          1.04
+        ]
+      },
+      {
+        "dataset": "CamCAN",
+        "modality": "MEG",
+        "metric": "MAE (years) ↓",
+        "lower": true,
+        "full": [
+          8.99,
+          0.14
+        ],
+        "lora": [
+          9.17,
+          0.44
+        ]
+      },
+      {
+        "dataset": "LEMON",
+        "modality": "fMRI",
+        "metric": "BAC (%) ↑",
+        "lower": false,
+        "full": [
+          58.95,
+          2.13
+        ],
+        "lora": [
+          59.36,
+          3.02
+        ]
+      }
+    ]
+  },
+  "linear_probing": {
+    "models": [
+      {
+        "name": "Base",
+        "rows": [
+          {
+            "setting": "Pretrained · full fine-tuning",
+            "values": [
+              [
+                81.88,
+                0.17
+              ],
+              [
+                68.23,
+                2.07
+              ],
+              [
+                8.99,
+                0.14
+              ]
+            ]
+          },
+          {
+            "setting": "Pretrained · linear probing",
+            "values": [
+              [
+                79.14,
+                0.24
+              ],
+              [
+                65.22,
+                1.47
+              ],
+              [
+                10.92,
+                0.22
+              ]
+            ]
+          },
+          {
+            "setting": "From scratch · full training",
+            "values": [
+              [
+                77.59,
+                0.27
+              ],
+              [
+                63.39,
+                2.36
+              ],
+              [
+                9.69,
+                1.07
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Huge",
+        "rows": [
+          {
+            "setting": "Pretrained · full fine-tuning",
+            "values": [
+              [
+                82.87,
+                0.18
+              ],
+              [
+                71.79,
+                2.19
+              ],
+              [
+                7.87,
+                0.22
+              ]
+            ]
+          },
+          {
+            "setting": "Pretrained · linear probing",
+            "values": [
+              [
+                81.92,
+                0.21
+              ],
+              [
+                70.76,
+                1.22
+              ],
+              [
+                9.02,
+                0.11
+              ]
+            ]
+          },
+          {
+            "setting": "From scratch · full training",
+            "values": [
+              [
+                80.82,
+                0.18
+              ],
+              [
+                64.85,
+                1.03
+              ],
+              [
+                8.59,
+                0.94
+              ]
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "noise": {
+    "dataset": "TUAB",
+    "model": "Base",
+    "metric": "Balanced accuracy (%)",
+    "rows": [
+      {
+        "snr": 20,
+        "dint": [
+          80.18,
+          0.33
+        ],
+        "vanilla": [
+          78.93,
+          0.4
+        ]
+      },
+      {
+        "snr": 10,
+        "dint": [
+          75.27,
+          0.88
+        ],
+        "vanilla": [
+          74.2,
+          1.06
+        ]
+      },
+      {
+        "snr": 5,
+        "dint": [
+          75.02,
+          0.28
+        ],
+        "vanilla": [
+          72.71,
+          1.21
+        ]
+      },
+      {
+        "snr": 0,
+        "dint": [
+          73.47,
+          1.11
+        ],
+        "vanilla": [
+          70.53,
+          1.86
+        ]
+      },
+      {
+        "snr": -5,
+        "dint": [
+          69.29,
+          2.34
+        ],
+        "vanilla": [
+          63.96,
+          3.47
+        ]
+      }
+    ]
+  },
+  "representation": {
+    "method": "PCA",
+    "features": "Fine-tuned embeddings",
+    "rows": [
+      {
+        "dataset": "TUAB",
+        "modality": "EEG",
+        "model": "Base",
+        "pearson": 0.701,
+        "spearman": 0.678,
+        "auc": 0.892
+      },
+      {
+        "dataset": "TUAB",
+        "modality": "EEG",
+        "model": "Large",
+        "pearson": 0.707,
+        "spearman": 0.687,
+        "auc": 0.898
+      },
+      {
+        "dataset": "TUAB",
+        "modality": "EEG",
+        "model": "Huge",
+        "pearson": 0.723,
+        "spearman": 0.7,
+        "auc": 0.905
+      },
+      {
+        "dataset": "ADNI",
+        "modality": "fMRI",
+        "model": "Base",
+        "pearson": 0.38,
+        "spearman": 0.388,
+        "auc": 0.724
+      },
+      {
+        "dataset": "ADNI",
+        "modality": "fMRI",
+        "model": "Large",
+        "pearson": 0.478,
+        "spearman": 0.438,
+        "auc": 0.753
+      },
+      {
+        "dataset": "ADNI",
+        "modality": "fMRI",
+        "model": "Huge",
+        "pearson": 0.484,
+        "spearman": 0.496,
+        "auc": 0.786
+      },
+      {
+        "dataset": "CamCAN",
+        "modality": "MEG",
+        "model": "Base",
+        "pearson": 0.746,
+        "spearman": 0.735,
+        "auc": null
+      },
+      {
+        "dataset": "CamCAN",
+        "modality": "MEG",
+        "model": "Large",
+        "pearson": 0.784,
+        "spearman": 0.762,
+        "auc": null
+      },
+      {
+        "dataset": "CamCAN",
+        "modality": "MEG",
+        "model": "Huge",
+        "pearson": 0.805,
+        "spearman": 0.772,
+        "auc": null
+      }
+    ]
+  }
+}
