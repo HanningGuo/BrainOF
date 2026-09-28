@@ -7,7 +7,7 @@ authors:
   - family-names: "Guo"
     given-names: "Hanning"
 preferred-citation:
-  type: conference-paper
+  type: article
   title: "Brain-OF: An Omnifunctional Foundation Model for fMRI, EEG and MEG"
   authors:
     - family-names: "Guo"
@@ -25,6 +25,6 @@ preferred-citation:
       given-names: "Abigail"
     - family-names: "Dammers"
       given-names: "Jürgen"
-  collection-title: "Advances in Neural Information Processing Systems"
+  journal: "Advances in Neural Information Processing Systems"
   year: 2026
-  url: "你的论文在线链接(如arXiv或出版社链接)"
+  url: "https://arxiv.org/abs/2602.23410"
