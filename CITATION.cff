@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you find Brain-OF useful in your research, please consider citing our work."
+title: "Brain-OF"
+license: "Apache-2.0"
+url: "https://hanningguo.github.io/BrainOF/"
+authors:
+  - family-names: "Guo"
+    given-names: "Hanning"
+preferred-citation:
+  type: conference-paper
+  title: "Brain-OF: An Omnifunctional Foundation Model for fMRI, EEG and MEG"
+  authors:
+    - family-names: "Guo"
+      given-names: "Hanning"
+      orcid: "https://orcid.org/0000-0002-6993-3728"
+    - family-names: "Bi"
+      given-names: "Hanwen"
+    - family-names: "Abdellatif"
+      given-names: "Farah"
+    - family-names: "Galbenus"
+      given-names: "Andrei"
+    - family-names: "Shah"
+      given-names: "Jon. N."
+    - family-names: "Morrison"
+      given-names: "Abigail"
+    - family-names: "Dammers"
+      given-names: "Jürgen"
+  collection-title: "Advances in Neural Information Processing Systems"
+  year: 2026
+  url: "你的论文在线链接(如arXiv或出版社链接)"
