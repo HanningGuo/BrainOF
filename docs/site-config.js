@@ -1,12 +1,12 @@
 window.BRAIN_OF_CONFIG = {
-  links: { arxiv: null, github: 'https://github.com/HanningGuo/BrainOF', huggingface: null, additional: [] },
+  links: { arxiv: null, github: 'https://github.com/HanningGuo/BrainOF', huggingface: 'https://huggingface.co/collections/han-ning/brain-of', additional: [] },
   venue: { name: 'NeurIPS 2026' },
   showPersistentResources: true,
   models: [
-    { name: 'Base', total: '47.5', unit: 'M', active: '21.5M', layers: 12, status: 'reported', checkpoint: null },
-    { name: 'Large', total: '331', unit: 'M', active: '150M', layers: 24, status: 'reported', checkpoint: null },
-    { name: 'Huge', total: '1.7', unit: 'B', active: '500M', layers: 36, status: 'reported', checkpoint: null },
-    { name: 'Giant', total: '9', unit: ' B', active: '1.2B', layers: 48, status: 'reported', checkpoint: null, featured: true }
+    { name: 'Base', total: '47.5', unit: 'M', active: '21.5M', layers: 12, status: 'reported', checkpoint: 'https://huggingface.co/han-ning/Brain-OF-Base' },
+    { name: 'Large', total: '331', unit: 'M', active: '150M', layers: 24, status: 'reported', checkpoint: 'https://huggingface.co/han-ning/Brain-OF-Large' },
+    { name: 'Huge', total: '1.7', unit: 'B', active: '500M', layers: 36, status: 'reported', checkpoint: 'https://huggingface.co/han-ning/Brain-OF-Huge' },
+    { name: 'Giant', total: '9', unit: ' B', active: '1.2B', layers: 48, status: 'reported', checkpoint: 'https://huggingface.co/han-ning/Brain-OF-Giant', featured: true }
   ],
   // Example: { src: 'assets/talk.mp4', poster: 'assets/talk-poster.jpg', title: 'Brain-OF overview', captions: 'assets/talk.vtt' }
   video: null,
