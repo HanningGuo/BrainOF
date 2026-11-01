@@ -1,5 +1,5 @@
 window.BRAIN_OF_CONFIG = {
-  links: { arxiv: null, github: 'https://github.com/HanningGuo/BrainOF', huggingface: 'https://huggingface.co/collections/han-ning/brain-of', additional: [] },
+  links: { arxiv: 'https://arxiv.org/abs/2602.23410', github: 'https://github.com/HanningGuo/BrainOF', huggingface: 'https://huggingface.co/collections/han-ning/brain-of', additional: [] },
   venue: { name: 'NeurIPS 2026' },
   showPersistentResources: true,
   models: [
