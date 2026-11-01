@@ -299,6 +299,7 @@ class DintTransformer(nn.Module):
         latents = self.arness1(x1, attn_masks1)
         # fuse modality 2 to the latent space
         fused_x = self.arness2(x2, attn_masks2, latents)
+        
 
         if self.use_checkpoint and self.checkpoint_blk_ids is None:
             self.checkpoint_blk_ids = [blk_id for blk_id in range(len(self.DintTransformerEncoder)) if blk_id % self.checkpoint_every_n == 0]
