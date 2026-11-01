@@ -1,0 +1,43 @@
+# ------ basic settings ------
+root: /path/to/BrainSignalDataset # the root path of dataset
+out_root: /path/to/results #<output-root-to-save-results>
+print_freq: 50
+num_workers: 12
+seed: 3407
+
+# ------ dataset settings ------
+dataset:
+  name: [ABIDE1, ABIDE2, ABRIM, AOMIC_ID1000, AOMIC_PIOP1, AOMIC_PIOP2, CamCAN_fMRI_Rest, CamCAN_fMRI_Task, CamCAN_MEG_Rest, CamCAN_MEG_Task, CHCP_fMRI_Rest, CHCP_fMRI_Task, CORR, DLBS, FACED, HCP_YA_fMRI_Restin, HCP_YA_fMRI_Task, HCP_YA_MEG_Restin, HCP_YA_MEG_Task, LEMON_EEG, LEMON_fMRI, MOUS_fMRI_Rest, MOUS_fMRI_Task, MOUS_MEG_Rest, MOUS_MEG_Task, NADR, Narratives, NKI_RS, OMEGA, Paingen, PhysioNet, PREDICT, QTIM, REEG_BACA, REST_meta_MDD, SALD, SEED, SEED_DV, SEED_SD, SEED_VIG, SEED_VII, SEED_VLA_VRW, SpaceTop, TDBRAIN, TUEG, UCLA_CNP, WAND_fMRI_Rest, WAND_fMRI_Task, WAND_MEG_Rest, WAND_MEG_Task, WBCIC]
+  signal_size: [306, 1984]  # tune it multiple of the patch size
+
+# ------ model settings ------
+model:
+  name: brainof_giant_9B_A1_2B
+  init_values: 0.000001
+
+# ------ distribute settings ------
+distribute:
+  parallelism: FSDP
+
+# ------ pretraining settings ------
+pretraining:
+  mask_ratio_min: 0.65
+  mask_ratio_max: 0.75
+  mask_ratio_mu: 0.70
+  mask_ratio_std: 0.05
+
+# ------ train settings ------
+train:
+  batch_size: 64  # global bsz 7168 = 64 * 4 gpus * 28 nodes
+  epochs: 300
+  clip_grad: 1.0
+  aux_loss_free_alpha: 1e-3
+  optimizer:
+    base_lr: 2.5e-3 # global bsz 7168
+    weight_decay: 5e-2
+    betas: (0.9, 0.95)
+    eps: 1e-15
+  lr_scheduler:
+    warmup_epochs: 15
+    warmup_lr: 2.5e-5
+    min_lr: 2.5e-5
