@@ -203,6 +203,7 @@ Choose a YAML from [`configs/`](configs/) that matches your model and task. Defa
 | `train.accumulation_steps` | Integer ≥ 1 | Number of batches accumulated per optimizer step. |
 | `train.optimizer.base_lr` | Positive float | Base rate at the reference global batch size; automatically scales with effective global batch size. Retune for your setup; see [Batch Size and Learning Rate Scaling](#batch-size-and-learning-rate-scaling) below. |
 | `train.clip_grad` | Positive float or `null` | Maximum gradient norm; `null` disables gradient clipping. |
+| `train.optimizer.layer_decay` | Float (typically `0.0 < value ≤ 1.0`) | Finetuning learning-rate decay across layer groups: values below `1` reduce earlier-layer rates, and `1.0` disables layer-wise decay. |
 | `model.pretrained_model` / `model.resume` | Checkpoint paths or `null` | Initialize a downstream encoder / resume a training checkpoint. See [Checkpoints](#checkpoints) for formats. |
 | `model.use_lora` / `model.enable_lp` | `true` / `false` | Enable LoRA or frozen-backbone probing; see [Full finetuning, LoRA, and probing](#full-finetuning-lora-and-probing). |
 | `distribute.parallelism` | `DDP` / `FSDP` | Distributed training strategy; match the checkpoint format when loading weights. |
@@ -218,7 +219,7 @@ Choose a YAML from [`configs/`](configs/) that matches your model and task. Defa
 <!-- | `train.optimizer.weight_decay` | Float ≥ 0 | AdamW weight decay. |
 | `train.lr_scheduler.warmup_lr` / `train.lr_scheduler.min_lr` | Floats ≥ 0 | Warmup starting learning rate / cosine schedule minimum; both are scaled with batch size. |
 | `eval_mode` | `true` / `false` | Evaluate a downstream checkpoint without training. | -->
-<!-- | `train.optimizer.layer_decay` | Float (typically `0.0 < value ≤ 1.0`) | Finetuning learning-rate decay across layer groups: values below `1` reduce earlier-layer rates, and `1.0` disables layer-wise decay. | -->
+
 
 <!-- <p align="justify">
 Logs, TensorBoard events, and checkpoints are saved under <code>&lt;out_root&gt;/results/Pretraining/&lt;run&gt;/</code> for pretraining and <code>&lt;out_root&gt;/results/&lt;dataset&gt;/&lt;run&gt;/</code> for finetuning.
