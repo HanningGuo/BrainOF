@@ -1,0 +1,38 @@
+# ------ basic settings ------
+root: /path/to/BrainSignalDataset # the root path of dataset
+out_root: /path/to/results  #<output-root-to-save-results>
+num_workers: 12
+seed: 3407
+
+# ------ dataset settings ------
+dataset:
+  name: LEMON_EEG
+  signal_size: [61, 2000]
+
+# ------ model settings ------
+model:
+  name: brainof_base_50M_A22M
+  pretrained_model: /path/to/checkpoint-latest.pth
+  max_seq_length: 1952
+  num_classes: 2
+  init_scale: 0.1
+#  use_lora: True
+
+# ------ train settings ------
+train:
+  batch_size: 128 # global bsz 512 = 128 * 4 gpus
+  epochs: 50
+  clip_grad: 5.0
+  aux_loss_free_alpha: 2e-5 # global bsz 512, actual alpha 1e-5
+  metrics: ['bac', 'aucpr', 'auroc']
+  main_metric: bac
+  optimizer:
+    base_lr: 1e-5 # global bsz 512, actual lr 1.5e-5
+    weight_decay: 1e-1
+  lr_scheduler:
+    warmup_epochs: 5
+    warmup_lr: 1e-7
+    min_lr: 1e-7
+  criterion:
+    task: classification
+    label_smoothing: 0.1

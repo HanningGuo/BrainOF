@@ -1,0 +1,40 @@
+# ------ basic settings ------
+root: /path/to/BrainSignalDataset # the root path of dataset
+out_root: /path/to/results  #<output-root-to-save-results>
+print_freq: 10
+num_workers: 12
+seed: 3407
+
+# ------ dataset settings ------
+dataset:
+  name: CamCAN_MEG_Rest
+  signal_size: [306, 380]
+
+# ------ model settings ------
+model:
+  name: brainof_base_50M_A22M
+  pretrained_model: /path/to/brainof_base_50M_A22M.pth
+  max_seq_length: 1836
+  num_classes: 1
+  init_scale: 0.1
+  droppath: 0.1
+  # use_lora: True
+  # enable_lp: True
+
+# ------ train settings ------
+train:
+  batch_size: 256 # global bsz 1024 = 256 * 4 gpus
+  epochs: 50
+  clip_grad: 5.0
+  aux_loss_free_alpha: 1e-5
+  metrics: ['mae', 'rmse', 'r2', 'mape']
+  main_metric: mae
+  optimizer:
+    base_lr: 1e-4 # global bsz 1024
+    weight_decay: 1e-1
+  lr_scheduler:
+    warmup_epochs: 5
+    warmup_lr: 1e-6
+    min_lr: 1e-6
+  criterion:
+    task: prediction
